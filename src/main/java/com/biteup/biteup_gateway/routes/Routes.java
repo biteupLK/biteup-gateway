@@ -61,7 +61,9 @@ public class Routes {
   public RouterFunction<ServerResponse> paymentServiceRoute() {
     return GatewayRouterFunctions.route("biteup_payment")
       .route(
-        RequestPredicates.path("/api/payment/*"),
+        RequestPredicates.path("/api/payment").or(
+          RequestPredicates.path("/api/payment/**")
+        ),
         HandlerFunctions.http("http://localhost:8084")
       )
       .build();
